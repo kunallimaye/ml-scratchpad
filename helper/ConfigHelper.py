@@ -62,7 +62,7 @@ class ConfigHelper:
         return self.execute_sys_cmd("gcloud auth login --launch-browser")
     
     def load_config_file(self, filename):
-        from dotenv import load_dotenv
         self.install_python_module(["python-dotenv"])
+        from dotenv import load_dotenv
 
         return load_dotenv(dotenv_path=filename)
