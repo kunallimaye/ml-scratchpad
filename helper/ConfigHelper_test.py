@@ -21,5 +21,9 @@ class TestConfigHelper(unittest.TestCase):
         gcp_project_id = "kunal-scratch 2>/dev/null"
         self.assertEqual(self.helper.set_default_project(gcp_project_id), 0)
     
+    def test_load_config_file(self):
+        self.assertEqual(self.helper.load_config_file("./config/example.env"), True)
+        self.assertEqual(self.helper.load_config_file("./file-not-found/does-not-exist.env"), False)
+
 if __name__ == '__main__':
     unittest.main()
