@@ -1,3 +1,4 @@
+import os
 import unittest
 from helper import ConfigHelper
 
@@ -24,6 +25,19 @@ class TestConfigHelper(unittest.TestCase):
     def test_load_config_file(self):
         self.assertEqual(self.helper.load_config_file("./config/example.env"), True)
         self.assertEqual(self.helper.load_config_file("./file-not-found/does-not-exist.env"), False)
+
+    def test_restart_kernel(self):
+        # Create a child process
+        pid = os.fork()
+        if pid > 0:
+            # parent process
+            info = os.waitpid(pid, 0) # wait for child process
+            if os.WIFEXITED(info[1]):
+                code = os.WEXITSTATUS(info[1])
+            self.assertEqual(code, 0) # Check that the python kernel shutdown was successful
+        else:
+            # child process
+            self.helper.restart_kernel()
 
 if __name__ == '__main__':
     unittest.main()

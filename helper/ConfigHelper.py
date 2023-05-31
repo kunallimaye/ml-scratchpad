@@ -5,6 +5,7 @@ A collection of helper functions to configure
 ML pipelines in GCP.
 """
 
+import os
 import sys
 import subprocess
 
@@ -62,7 +63,17 @@ class ConfigHelper:
         return self.execute_sys_cmd("gcloud auth login --launch-browser")
     
     def load_config_file(self, filename):
+        """load_config_file
+
+        Loads the configuration info as variables.  
+        filename defaults to '.env'
+        """
         self.install_python_module(["python-dotenv"])
         from dotenv import load_dotenv
 
         return load_dotenv(dotenv_path=filename)
+    
+    def restart_kernel(self):
+        os._exit(00)
+
+        return
