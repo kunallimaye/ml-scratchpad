@@ -5,7 +5,6 @@ A collection of helper functions to configure
 ML pipelines in GCP.
 """
 
-import os
 import sys
 import subprocess
 
@@ -51,3 +50,13 @@ class ConfigHelper:
         """
         
         return self.execute_sys_cmd(f"gcloud config set project {project_id}")
+    
+    def gcp_auth_user(self):
+        # auth the user for google platform
+        """gcp_auth_user
+
+        Simple utility to authenticate the user.  
+        It will launch a browser which will manage the auth flow.
+        If browser is not available it will print the URL to stdout.
+        """        
+        return self.execute_sys_cmd("gcloud auth login --launch-browser")

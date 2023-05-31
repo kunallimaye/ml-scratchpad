@@ -7,6 +7,10 @@ class TestConfigHelper(unittest.TestCase):
         super().__init__(methodName)
         self.helper = ConfigHelper.ConfigHelper()
 
+    # TODO: find an elegant way to run the auth test
+    # def test_gcp_auth_user(self):
+    #     self.assertEqual(self.helper.gcp_auth_user(), 0)
+
     def test_install_module(self):
         self.assertEqual(self.helper.install_python_module(["pip"]), None)
 
@@ -14,8 +18,8 @@ class TestConfigHelper(unittest.TestCase):
         self.assertEqual(self.helper.execute_sys_cmd("ls -al > /dev/null"), 0)
 
     def test_set_default_project(self):
-        gcp_project_id = "kunal-scratch"
+        gcp_project_id = "kunal-scratch 2>/dev/null"
         self.assertEqual(self.helper.set_default_project(gcp_project_id), 0)
-        
+    
 if __name__ == '__main__':
     unittest.main()
