@@ -1,6 +1,6 @@
 import os
 import unittest
-from helper import ConfigHelper
+from utils.config import ConfigHelper
 
 class TestConfigHelper(unittest.TestCase):
 
@@ -39,5 +39,17 @@ class TestConfigHelper(unittest.TestCase):
             # child process
             self.helper.restart_kernel()
 
+    def test_create_pipeline_root(self):
+        self.helper.load_config_file("./config/actual.env")
+        self.assertEqual(self.helper.create_pipeline_root(), None)
+        return
+    
+    # TODO: find an elegant way to test install dependencies
+    # def test_install_dependencies(self):
+    #     self.helper.load_config_file("./config/example.env")
+    #     self.assertEqual(self.helper.install_dependencies(), None)
+
+    #     return
+    
 if __name__ == '__main__':
     unittest.main()
